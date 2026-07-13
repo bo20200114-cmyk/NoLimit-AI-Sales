@@ -41,21 +41,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   tl
     // fade out hero copy + subtle zoom on the lifestyle photo
-    .to(scrollHint, { opacity: 0, duration: 0.3 }, 0)
-    .to([heroContent, heroInfo], { opacity: 0, y: -30, duration: 1 }, 0)
-    .to(heroImg, { scale: 1.12, duration: 1.4 }, 0)
-    .to(heroLayer, { opacity: 0, duration: 1 }, 0.7)
+    .to(scrollHint, { opacity: 0, duration: 0.25 }, 0)
+    .to([heroContent, heroInfo], { opacity: 0, y: -30, duration: 0.7 }, 0.15)
+    .to(heroImg, { scale: 1.12, duration: 1 }, 0)
+    .to(heroLayer, { opacity: 0, duration: 0.6 }, 0.75)
 
-    // reveal floating product
-    .to(productLayer, { opacity: 1, duration: 1 }, 0.6)
-    .fromTo(productShot, { scale: 0.82, opacity: 0 }, { scale: 1, opacity: 1, duration: 1 }, 0.7)
-    .to(productShot, { scale: 1.5, opacity: 0, duration: 1.2 }, 1.9)
-    .to(productLayer, { opacity: 0, duration: 1 }, 2.5)
+    // reveal floating product (starts once hero has mostly cleared)
+    .fromTo(productLayer, { opacity: 0 }, { opacity: 1, duration: 0.6 }, 1.15)
+    .fromTo(productShot, { scale: 0.82, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.7 }, 1.2)
+    .to({}, { duration: 0.8 }, 1.9) // hold — product fully settled and readable
+    .to(productShot, { scale: 1.35, opacity: 0, duration: 0.7 }, 2.7)
+    .to(productLayer, { opacity: 0, duration: 0.5 }, 3.0)
 
     // macro detail + spec callouts
-    .fromTo(macroLayer, { opacity: 0 }, { opacity: 1, duration: 1 }, 2.3)
-    .fromTo(macroImg, { scale: 1.35 }, { scale: 1, duration: 1.6 }, 2.3)
-    .to(specLabels, { opacity: 1, y: 0, duration: 0.6, stagger: 0.15 }, 2.9);
+    .fromTo(macroLayer, { opacity: 0 }, { opacity: 1, duration: 0.6 }, 2.9)
+    .fromTo(macroImg, { scale: 1.3 }, { scale: 1, duration: 1.1 }, 2.9)
+    .to(specLabels, { opacity: 1, y: 0, duration: 0.5, stagger: 0.13 }, 3.4);
 
   // Gentle magnetic hover on the newsletter button, purely decorative.
   const submitBtn = document.querySelector(".footer__form button");

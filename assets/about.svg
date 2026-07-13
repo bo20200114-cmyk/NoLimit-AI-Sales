@@ -1,25 +1,97 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1200">
+  <defs><radialGradient id="bg-about" cx="50%" cy="45%" r="70%"><stop offset="0%" stop-color="#33363c"/><stop offset="60%" stop-color="#111214"/><stop offset="100%" stop-color="#040404"/></radialGradient></defs><rect width="100%" height="100%" fill="url(#bg-about)"/>
+  <g transform="translate(150 620) rotate(4) scale(1.85)">
+    
   <defs>
-    <radialGradient id="aboutBg" cx="40%" cy="30%" r="80%">
-      <stop offset="0%" stop-color="#33363c"/>
-      <stop offset="60%" stop-color="#111214"/>
-      <stop offset="100%" stop-color="#040404"/>
-    </radialGradient>
-    <linearGradient id="aboutShoe" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f2f1ee"/>
-      <stop offset="100%" stop-color="#6a6e76"/>
+    <clipPath id="upperClip-about">
+      <path d="M16,166
+C8,146 14,124 32,106
+C56,82 92,64 130,54
+C160,46 185,42 202,40
+C206,50 208,62 216,68
+C230,78 248,80 262,72
+C270,66 274,56 284,48
+C300,34 322,26 348,26
+C378,26 405,36 424,54
+C442,71 452,92 452,114
+C452,132 446,148 434,160
+L434,166
+L16,166 Z"/>
+    </clipPath>
+    <linearGradient id="baseGrad-about" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e8d3ae"/>
+      <stop offset="100%" stop-color="#c9a06c"/>
     </linearGradient>
+    <linearGradient id="soleGrad-about" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#161616"/>
+      <stop offset="100%" stop-color="#050505"/>
+    </linearGradient>
+    <pattern id="meshPat-about" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="14" height="14" fill="none"/>
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#a9784a" stroke-width="2.4"/>
+    </pattern>
   </defs>
-  <rect width="1000" height="1200" fill="url(#aboutBg)"/>
-  <g transform="translate(120 560) rotate(4) scale(2.1)" opacity="1">
-    <path d="M8,145 C5,136 10,126 22,120 C50,106 85,92 122,80 C155,70 180,60 195,46
-C202,39 208,30 218,24 C230,17 245,16 254,24 C260,30 259,39 264,44
-C280,42 296,47 301,58 L301,72 C301,82 294,90 284,92 L284,120
-C284,135 273,146 257,148 L40,148 C24,148 11,150 8,145 Z" fill="url(#aboutShoe)" />
-    <path d="M215,44 L245,28" stroke="rgba(0,0,0,0.28)" stroke-width="4" stroke-linecap="round" fill="none"/>
-    <path d="M225,58 L258,40" stroke="rgba(0,0,0,0.28)" stroke-width="4" stroke-linecap="round" fill="none"/>
-    <path d="M236,72 L270,53" stroke="rgba(0,0,0,0.28)" stroke-width="4" stroke-linecap="round" fill="none"/>
-    <path d="M6,145 L286,145 C296,145 300,152 297,160 C294,168 285,170 274,170
-L34,170 C18,170 6,166 4,158 C3,152 4,148 6,145 Z" fill="#d7402c" />
+
+  <!-- ground shadow -->
+  <ellipse cx="240" cy="218" rx="220" ry="18" fill="#000000" opacity="0.35"/>
+
+  <!-- outsole -->
+  <rect x="6" y="192" width="454" height="30" rx="15" fill="url(#soleGrad-about)"/>
+  <rect x="20" y="200" width="426" height="4" rx="2" fill="#000000" opacity="0.35"/>
+
+  <!-- midsole -->
+  <rect x="14" y="168" width="438" height="26" rx="13" fill="#f1efe9"/>
+  <rect x="14" y="186" width="438" height="8" rx="4" fill="#8a3a20"/>
+
+  <!-- upper base -->
+  <path d="M16,166
+C8,146 14,124 32,106
+C56,82 92,64 130,54
+C160,46 185,42 202,40
+C206,50 208,62 216,68
+C230,78 248,80 262,72
+C270,66 274,56 284,48
+C300,34 322,26 348,26
+C378,26 405,36 424,54
+C442,71 452,92 452,114
+C452,132 446,148 434,160
+L434,166
+L16,166 Z" fill="url(#baseGrad-about)"/>
+
+  <!-- toe + heel overlays, mesh + accent stripe, all safely clipped to the upper silhouette -->
+  <g clip-path="url(#upperClip-about)">
+    <ellipse cx="55" cy="132" rx="72" ry="58" fill="#5b2f1a" opacity="0.9"/>
+    <ellipse cx="432" cy="108" rx="66" ry="92" fill="#5b2f1a" opacity="0.9"/>
+    <rect x="88" y="36" width="150" height="150" fill="url(#meshPat-about)" opacity="0.55"/>
+    <polygon points="300,150 400,60 424,78 320,170" fill="#8a3a20" opacity="0.92"/>
+  </g>
+
+  <!-- collar pad (ankle opening rim) -->
+  <path d="M204,40 C208,50 210,62 218,68 C232,78 250,80 264,72 C272,66 276,56 286,48 C302,34 324,26 350,26 C372,26 392,32 408,42"
+        fill="none" stroke="#3a2013" stroke-width="13" stroke-linecap="round" opacity="0.95"/>
+
+  <!-- tongue -->
+  <path d="M206,44 C204,32 210,20 224,16 C238,12 250,18 252,30 C253,40 248,50 238,54 C226,58 210,54 206,44 Z" fill="#e3c9a3"/>
+
+  <!-- laces -->
+  <path d="M198,58 L246,42" stroke="#20222a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <path d="M204,72 L254,54" stroke="#20222a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <path d="M212,86 L262,66" stroke="#20222a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+      <path d="M222,99 L270,78" stroke="#20222a" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+  <circle cx="198" cy="58" r="4" fill="#1c1c1e"/>
+      <circle cx="204" cy="72" r="4" fill="#1c1c1e"/>
+      <circle cx="212" cy="86" r="4" fill="#1c1c1e"/>
+      <circle cx="222" cy="99" r="4" fill="#1c1c1e"/>
+  <circle cx="246" cy="42" r="4" fill="#1c1c1e"/>
+      <circle cx="254" cy="54" r="4" fill="#1c1c1e"/>
+      <circle cx="262" cy="66" r="4" fill="#1c1c1e"/>
+      <circle cx="270" cy="78" r="4" fill="#1c1c1e"/>
+
+  <!-- heel pull tab -->
+  <path d="M424,32 C420,24 424,16 434,14 C444,12 452,18 452,28 C452,38 444,46 434,44 C428,43 426,38 424,32 Z" fill="#3a2013"/>
+
+  <!-- brand mark: abstract forward-motion chevrons -->
+  <polygon points="340,118 366,92 378,92 352,118 378,144 366,144" fill="#f4ece0" opacity="0.92"/>
+  
   </g>
 </svg>
