@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000">
+  <defs>
+    <radialGradient id="heroBg" cx="72%" cy="38%" r="75%">
+      <stop offset="0%" stop-color="#3a3f47"/>
+      <stop offset="45%" stop-color="#1b1d22"/>
+      <stop offset="100%" stop-color="#08090a"/>
+    </radialGradient>
+    <linearGradient id="heroShoe" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4a4f58"/>
+      <stop offset="100%" stop-color="#0c0d0f"/>
+    </linearGradient>
+    <linearGradient id="heroSole" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8a8f99"/>
+      <stop offset="100%" stop-color="#2a2d33"/>
+    </linearGradient>
+  </defs>
+  <rect width="1800" height="1000" fill="url(#heroBg)"/>
+  <g transform="translate(560 260) rotate(-6) scale(2.55)" opacity="1">
+    <path d="M8,145 C5,136 10,126 22,120 C50,106 85,92 122,80 C155,70 180,60 195,46
+C202,39 208,30 218,24 C230,17 245,16 254,24 C260,30 259,39 264,44
+C280,42 296,47 301,58 L301,72 C301,82 294,90 284,92 L284,120
+C284,135 273,146 257,148 L40,148 C24,148 11,150 8,145 Z" fill="url(#heroShoe)" />
+    <path d="M215,44 L245,28" stroke="rgba(0,0,0,0.28)" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M225,58 L258,40" stroke="rgba(0,0,0,0.28)" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M236,72 L270,53" stroke="rgba(0,0,0,0.28)" stroke-width="4" stroke-linecap="round" fill="none"/>
+    <path d="M6,145 L286,145 C296,145 300,152 297,160 C294,168 285,170 274,170
+L34,170 C18,170 6,166 4,158 C3,152 4,148 6,145 Z" fill="url(#heroSole)" />
+  </g>
+  <rect width="1800" height="1000" fill="black" opacity="0.06"/>
+</svg>

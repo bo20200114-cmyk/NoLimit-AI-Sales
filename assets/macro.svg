@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1800 1000">
+  <defs>
+    <linearGradient id="macroBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1d20"/>
+      <stop offset="100%" stop-color="#050506"/>
+    </linearGradient>
+    <pattern id="tread" width="120" height="120" patternUnits="userSpaceOnUse" patternTransform="rotate(18)">
+      <rect width="120" height="120" fill="none"/>
+      <path d="M0,60 L60,0 L120,60 L60,120 Z" fill="none" stroke="#3a3d43" stroke-width="10"/>
+      <circle cx="60" cy="60" r="14" fill="#2a2c31"/>
+    </pattern>
+    <radialGradient id="macroVignette" cx="50%" cy="45%" r="70%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0.75"/>
+    </radialGradient>
+    <linearGradient id="macroSheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.10"/>
+      <stop offset="35%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1800" height="1000" fill="url(#macroBg)"/>
+  <rect width="1800" height="1000" fill="url(#tread)"/>
+  <rect width="1800" height="1000" fill="url(#macroSheen)"/>
+  <rect width="1800" height="1000" fill="url(#macroVignette)"/>
+</svg>

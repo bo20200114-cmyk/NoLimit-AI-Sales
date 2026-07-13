@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>STRYDE® — Engineered Motion</title>
+<meta name="description" content="Portfolio concept: a scroll-driven product reveal landing page for a footwear brand, inspired by high-end product sites." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header class="nav">
+  <div class="nav__brand">Stryde<span class="reg">®</span></div>
+
+  <nav class="nav__col nav__col--a">
+    <a href="#features">Featherlight</a>
+    <a href="#features">Engineered</a>
+    <a href="#features">Proven</a>
+  </nav>
+
+  <nav class="nav__col nav__col--b">
+    <a href="#story">Motion Redefined</a>
+    <a href="#story">Our Story</a>
+  </nav>
+
+  <a href="#" class="nav__cart">+ Cart</a>
+</header>
+
+<!-- ===================== PINNED HERO / PRODUCT STORY ===================== -->
+<section class="story" id="top">
+  <div class="story__pin">
+
+    <!-- Stage 1: lifestyle hero -->
+    <div class="layer layer--hero" data-layer="hero">
+      <img src="assets/hero.svg" alt="Model wearing the Stryde running shoe" />
+      <div class="layer__scrim"></div>
+
+      <div class="hero-content">
+        <h1 class="wordmark">Stryde<span class="reg">®</span></h1>
+        <p class="hero-copy hero-copy--left">
+          Performance footwear engineered for every stride. Precision-crafted foam.
+          Tested for endurance. Built for the long run.
+        </p>
+        <div class="hero-meta">
+          <span class="tag">(Drop)</span>
+          <span class="tag">(2026)</span>
+        </div>
+      </div>
+
+      <div class="hero-info">
+        <span class="info-label">Info</span>
+        <p class="hero-copy hero-copy--right">
+          Advanced cushion engineering meets responsive energy return.
+          Every pair tested for durability. Precision foam drives
+          performance forward.
+        </p>
+      </div>
+
+      <div class="scroll-hint">
+        <span></span>
+        Scroll
+      </div>
+    </div>
+
+    <!-- Stage 2: floating product -->
+    <div class="layer layer--product" data-layer="product">
+      <div class="product-glow"></div>
+      <img class="product-shot" src="assets/product-float.svg" alt="Stryde shoe, isolated studio shot" />
+    </div>
+
+    <!-- Stage 3: macro detail + specs -->
+    <div class="layer layer--macro" data-layer="macro">
+      <img src="assets/macro.svg" alt="Macro detail of the Stryde outsole" />
+      <div class="layer__scrim layer__scrim--dark"></div>
+
+      <div class="spec-label spec-label--1">
+        <span class="spec-label__line"></span>
+        <span class="spec-label__title">Cushion Rating</span>
+        <span class="spec-label__value">X1 Reactive Foam</span>
+      </div>
+      <div class="spec-label spec-label--2">
+        <span class="spec-label__line"></span>
+        <span class="spec-label__title">Energy Return</span>
+        <span class="spec-label__value">87%</span>
+      </div>
+      <div class="spec-label spec-label--3">
+        <span class="spec-label__line"></span>
+        <span class="spec-label__title">Drop</span>
+        <span class="spec-label__value">8mm Heel&ndash;to&ndash;Toe</span>
+      </div>
+      <div class="spec-label spec-label--4">
+        <span class="spec-label__line"></span>
+        <span class="spec-label__title">Weight</span>
+        <span class="spec-label__value">212g / Size 9</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== FEATURES ===================== -->
+<section class="features" id="features">
+  <div class="features__head">
+    <h2>Built Different.</h2>
+    <p>Three engineering pillars behind every pair we ship.</p>
+  </div>
+
+  <div class="features__grid">
+    <article class="feature-card">
+      <div class="feature-card__img">
+        <img src="assets/feature-featherlight.svg" alt="Featherlight upper detail" />
+      </div>
+      <h3>Featherlight</h3>
+      <p>An engineered knit upper that disappears on foot &mdash; 38% lighter than our previous generation.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-card__img">
+        <img src="assets/feature-engineered.svg" alt="Engineered midsole in motion" />
+      </div>
+      <h3>Engineered</h3>
+      <p>Dual-density midsole tuned in the lab and validated on 40,000km of real-world running data.</p>
+    </article>
+
+    <article class="feature-card">
+      <div class="feature-card__img">
+        <img src="assets/feature-proven.svg" alt="Proven outsole colorways" />
+      </div>
+      <h3>Proven</h3>
+      <p>Stress-tested to 500km of abrasion &mdash; the same rubber compound trusted by our race team.</p>
+    </article>
+  </div>
+</section>
+
+<!-- ===================== STORY / ABOUT ===================== -->
+<section class="about" id="story">
+  <div class="about__media">
+    <img src="assets/about.svg" alt="Stryde shoe on foot, close up" />
+  </div>
+  <div class="about__copy">
+    <span class="eyebrow">Our Story</span>
+    <h2>Motion, redefined from the ground up.</h2>
+    <p>
+      Stryde started with a simple frustration: performance shoes that looked
+      fast but felt heavy. We rebuilt the stack from the outsole up &mdash;
+      new foam chemistry, a lighter knit, a geometry tuned for how people
+      actually move.
+    </p>
+    <p>
+      Every pair that leaves our studio has been on a runner's foot first.
+      No shortcuts, no filler colorways &mdash; just the build we'd want to
+      race in ourselves.
+    </p>
+    <a href="#" class="link-underline">Read the full story &rarr;</a>
+  </div>
+</section>
+
+<!-- ===================== COLORWAY GALLERY ===================== -->
+<section class="gallery">
+  <div class="gallery__head">
+    <h2>Colorways.</h2>
+  </div>
+  <div class="gallery__track">
+    <figure>
+      <img src="assets/colorway-1.svg" alt="Colorway 01" />
+      <figcaption>01 &mdash; Slate / Volt</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/colorway-2.svg" alt="Colorway 02" />
+      <figcaption>02 &mdash; Chalk / Black</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/colorway-3.svg" alt="Colorway 03" />
+      <figcaption>03 &mdash; Sand / Rust</figcaption>
+    </figure>
+    <figure>
+      <img src="assets/colorway-4.svg" alt="Colorway 04" />
+      <figcaption>04 &mdash; Optic / Green</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer class="footer">
+  <div class="footer__top">
+    <h2>Get early access to the next drop.</h2>
+    <form class="footer__form" onsubmit="return false;">
+      <input type="email" placeholder="you@email.com" required />
+      <button type="submit">Notify me</button>
+    </form>
+  </div>
+  <div class="footer__bottom">
+    <div class="footer__brand">Stryde<span class="reg">®</span></div>
+    <nav class="footer__links">
+      <a href="#">Instagram</a>
+      <a href="#">Twitter</a>
+      <a href="#">Journal</a>
+    </nav>
+    <span class="footer__note">Concept portfolio piece &mdash; not a real product. &copy; 2026.</span>
+  </div>
+</footer>
+
+<script src="vendor/gsap.min.js"></script>
+<script src="vendor/ScrollTrigger.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
