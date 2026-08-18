@@ -381,6 +381,105 @@
     border:1px solid var(--border);
     background:var(--surface-raised);
   }
+  .case-card__top{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    align-items:flex-start;
+  }
+  .case-card__content{
+    flex:1 1 200px;
+    min-width:0;
+  }
+
+  .phone-mock{
+    flex:none;
+    width:132px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+    margin:0 auto;
+  }
+  .phone-mock__frame{
+    width:132px;
+    aspect-ratio:9/18.5;
+    background:#10151c;
+    border:3px solid #05070a;
+    border-radius:20px;
+    box-shadow:0 10px 24px -12px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.05);
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:12px 8px 10px;
+  }
+  .phone-mock__notch{
+    position:absolute;
+    top:6px;
+    left:50%;
+    transform:translateX(-50%);
+    width:38px;
+    height:5px;
+    border-radius:3px;
+    background:rgba(255,255,255,0.18);
+  }
+  .phone-mock__topbar{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:9px;
+    color:rgba(237,239,242,0.5);
+    margin-top:12px;
+  }
+  .phone-mock__handle{
+    font-family:var(--font-mono);
+    letter-spacing:0.03em;
+    color:rgba(237,239,242,0.6);
+    font-size:8px;
+  }
+  .phone-mock__avatar{
+    margin-top:14px;
+    width:36px;
+    height:36px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.14);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:16px;
+  }
+  .phone-mock__stat-num{
+    margin-top:12px;
+    font-family:var(--font-mono);
+    font-weight:700;
+    font-size:20px;
+    line-height:1;
+    color:#fff;
+  }
+  .phone-mock__stat-num .phone-mock__unit{
+    font-size:11px;
+    font-weight:500;
+    color:rgba(237,239,242,0.6);
+    margin-left:2px;
+  }
+  .phone-mock__stat-label{
+    margin-top:6px;
+    font-size:9.5px;
+    text-align:center;
+    line-height:1.4;
+    color:rgba(237,239,242,0.55);
+    padding:0 2px;
+  }
+  .phone-mock__caption{
+    font-size:10px;
+    line-height:1.5;
+    text-align:center;
+    color:var(--ink-faint);
+  }
+
   .case-card__industry{
     font-family:var(--font-mono);
     font-size:12px;
@@ -664,36 +763,72 @@
 
       <div class="case-grid">
         <article class="case-card">
-          <div class="case-card__industry">製造業（板金加工）</div>
-          <div class="case-card__stats">
-            <div class="case-stat">
-              <span class="case-stat__label">介入前</span>
-              <span class="case-stat__value">フォロワー 80人</span>
+          <div class="case-card__top">
+            <div class="phone-mock" aria-hidden="true">
+              <div class="phone-mock__frame">
+                <div class="phone-mock__notch"></div>
+                <div class="phone-mock__topbar">
+                  <span class="phone-mock__back">&#8249;</span>
+                  <span class="phone-mock__handle">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                  <span class="phone-mock__menu">&#8943;</span>
+                </div>
+                <div class="phone-mock__avatar">&#127981;</div>
+                <div class="phone-mock__stat-num">6<span class="phone-mock__unit">人</span></div>
+                <div class="phone-mock__stat-label">採用に貢献（8ヶ月）</div>
+              </div>
+              <span class="phone-mock__caption">※運用画面のイメージ図・アカウント名は伏せています</span>
             </div>
-            <span class="case-stat__arrow" aria-hidden="true">→</span>
-            <div class="case-stat">
-              <span class="case-stat__label">8ヶ月後</span>
-              <span class="case-stat__value case-stat__value--highlight">採用 6人に貢献</span>
+            <div class="case-card__content">
+              <div class="case-card__industry">製造業（板金加工）</div>
+              <div class="case-card__stats">
+                <div class="case-stat">
+                  <span class="case-stat__label">介入前</span>
+                  <span class="case-stat__value">フォロワー 80人</span>
+                </div>
+                <span class="case-stat__arrow" aria-hidden="true">→</span>
+                <div class="case-stat">
+                  <span class="case-stat__label">8ヶ月後</span>
+                  <span class="case-stat__value case-stat__value--highlight">採用 6人に貢献</span>
+                </div>
+              </div>
+              <p class="case-card__plan">介入要素：通常プラン 月額22万円（アカウント設計・企画立案・台本/コンテ作成・編集・月8投稿・月次運用レポート提出）</p>
             </div>
           </div>
-          <p class="case-card__plan">介入要素：通常プラン 月額22万円（アカウント設計・企画立案・台本/コンテ作成・編集・月8投稿・月次運用レポート提出）</p>
         </article>
 
         <article class="case-card">
-          <div class="case-card__industry">介護事業所</div>
-          <div class="case-card__stats">
-            <div class="case-stat">
-              <span class="case-stat__label">介入前</span>
-              <span class="case-stat__value">SNS運用なし</span>
+          <div class="case-card__top">
+            <div class="phone-mock" aria-hidden="true">
+              <div class="phone-mock__frame">
+                <div class="phone-mock__notch"></div>
+                <div class="phone-mock__topbar">
+                  <span class="phone-mock__back">&#8249;</span>
+                  <span class="phone-mock__handle">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</span>
+                  <span class="phone-mock__menu">&#8943;</span>
+                </div>
+                <div class="phone-mock__avatar">&#129309;</div>
+                <div class="phone-mock__stat-num">5,000<span class="phone-mock__unit">人+</span></div>
+                <div class="phone-mock__stat-label">フォロワー（月間最高300万再生）</div>
+              </div>
+              <span class="phone-mock__caption">※運用画面のイメージ図・アカウント名は伏せています</span>
             </div>
-            <span class="case-stat__arrow" aria-hidden="true">→</span>
-            <div class="case-stat">
-              <span class="case-stat__label">介入後</span>
-              <span class="case-stat__value case-stat__value--highlight">フォロワー 5,000人超／月間最高300万再生</span>
+            <div class="case-card__content">
+              <div class="case-card__industry">介護事業所</div>
+              <div class="case-card__stats">
+                <div class="case-stat">
+                  <span class="case-stat__label">介入前</span>
+                  <span class="case-stat__value">SNS運用なし</span>
+                </div>
+                <span class="case-stat__arrow" aria-hidden="true">→</span>
+                <div class="case-stat">
+                  <span class="case-stat__label">介入後</span>
+                  <span class="case-stat__value case-stat__value--highlight">フォロワー 5,000人超／月間最高300万再生</span>
+                </div>
+              </div>
+              <p class="case-card__detail">地元でも声をかけられるほど認知され、「SNSを見て応募しました」というDMが毎月安定して届くように。効果を確認しながら4年間継続中。</p>
+              <p class="case-card__plan">介入要素：通常プラン 月額22万円（アカウント設計・企画立案・台本/コンテ作成・編集・月8投稿・月次運用レポート提出）</p>
             </div>
           </div>
-          <p class="case-card__detail">地元でも声をかけられるほど認知され、「SNSを見て応募しました」というDMが毎月安定して届くように。効果を確認しながら4年間継続中。</p>
-          <p class="case-card__plan">介入要素：通常プラン 月額22万円（アカウント設計・企画立案・台本/コンテ作成・編集・月8投稿・月次運用レポート提出）</p>
         </article>
       </div>
     </section>
