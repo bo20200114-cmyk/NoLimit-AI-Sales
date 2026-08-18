@@ -367,6 +367,52 @@
     margin-top:20px;
   }
   @media (max-width:640px){ .value-cards{grid-template-columns:1fr;} }
+
+  .case-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:680px){ .case-grid{grid-template-columns:1fr;} }
+  .case-card{
+    display:flex;
+    flex-direction:column;
+    padding:22px 22px 18px;
+    border:1px solid var(--border);
+    background:var(--surface-raised);
+  }
+  .case-card__industry{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.08em;
+    color:var(--accent-value);
+    font-weight:700;
+    margin-bottom:14px;
+  }
+  .case-card__stats{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    flex-wrap:wrap;
+  }
+  .case-stat{display:flex; flex-direction:column; gap:4px;}
+  .case-stat__label{font-size:11.5px; color:var(--ink-faint);}
+  .case-stat__value{font-size:14.5px; font-weight:700; color:var(--ink);}
+  .case-stat__value--highlight{color:var(--accent-value);}
+  .case-stat__arrow{color:var(--ink-faint); font-size:18px; padding-bottom:2px;}
+  .case-card__detail{
+    margin:14px 0 0;
+    font-size:13.5px;
+    color:var(--ink-muted);
+  }
+  .case-card__plan{
+    margin:16px 0 0;
+    padding-top:12px;
+    border-top:1px dashed var(--border);
+    font-size:11.5px;
+    color:var(--ink-faint);
+  }
+
   .value-card{
     padding:18px 20px;
     border:1px solid var(--border);
@@ -607,6 +653,48 @@
           <div class="value-card__label">月あたりの差額（浮く可能性のある予算）</div>
           <div class="value-card__num" id="diffMonthlyOut">¥0</div>
         </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section class="section">
+      <div class="eyebrow">導入事例 — 同じ通常プランでの実績</div>
+      <h2>「効果は保証できない」。それでも、これが実績です。</h2>
+      <p class="section__note">成果は業種やアカウントの状況によって変わるため、効果を保証するものではありません。ただし、この通常プランで成果が出なかった事例はこれまでありません。</p>
+
+      <div class="case-grid">
+        <article class="case-card">
+          <div class="case-card__industry">製造業（板金加工）</div>
+          <div class="case-card__stats">
+            <div class="case-stat">
+              <span class="case-stat__label">介入前</span>
+              <span class="case-stat__value">フォロワー 80人</span>
+            </div>
+            <span class="case-stat__arrow" aria-hidden="true">→</span>
+            <div class="case-stat">
+              <span class="case-stat__label">8ヶ月後</span>
+              <span class="case-stat__value case-stat__value--highlight">採用 6人に貢献</span>
+            </div>
+          </div>
+          <p class="case-card__plan">介入要素：通常プラン 月額22万円（アカウント設計・企画立案・台本/コンテ作成・編集・月8投稿・月次運用レポート提出）</p>
+        </article>
+
+        <article class="case-card">
+          <div class="case-card__industry">介護事業所</div>
+          <div class="case-card__stats">
+            <div class="case-stat">
+              <span class="case-stat__label">介入前</span>
+              <span class="case-stat__value">SNS運用なし</span>
+            </div>
+            <span class="case-stat__arrow" aria-hidden="true">→</span>
+            <div class="case-stat">
+              <span class="case-stat__label">介入後</span>
+              <span class="case-stat__value case-stat__value--highlight">フォロワー 5,000人超／月間最高300万再生</span>
+            </div>
+          </div>
+          <p class="case-card__detail">地元でも声をかけられるほど認知され、「SNSを見て応募しました」というDMが毎月安定して届くように。効果を確認しながら4年間継続中。</p>
+          <p class="case-card__plan">介入要素：通常プラン 月額22万円（アカウント設計・企画立案・台本/コンテ作成・編集・月8投稿・月次運用レポート提出）</p>
+        </article>
       </div>
     </section>
 
