@@ -409,10 +409,7 @@
     border-radius:20px;
     box-shadow:0 10px 24px -12px var(--shadow), inset 0 0 0 1px rgba(255,255,255,0.05);
     position:relative;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    padding:12px 8px 10px;
+    overflow:hidden;
   }
   .phone-mock__notch{
     position:absolute;
@@ -422,56 +419,15 @@
     width:38px;
     height:5px;
     border-radius:3px;
-    background:rgba(255,255,255,0.18);
+    background:rgba(255,255,255,0.55);
+    z-index:2;
   }
-  .phone-mock__topbar{
+  .phone-mock__shot{
     width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    font-size:9px;
-    color:rgba(237,239,242,0.5);
-    margin-top:12px;
-  }
-  .phone-mock__handle{
-    font-family:var(--font-mono);
-    letter-spacing:0.03em;
-    color:rgba(237,239,242,0.6);
-    font-size:8px;
-  }
-  .phone-mock__avatar{
-    margin-top:14px;
-    width:36px;
-    height:36px;
-    border-radius:50%;
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.14);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:16px;
-  }
-  .phone-mock__stat-num{
-    margin-top:12px;
-    font-family:var(--font-mono);
-    font-weight:700;
-    font-size:20px;
-    line-height:1;
-    color:#fff;
-  }
-  .phone-mock__stat-num .phone-mock__unit{
-    font-size:11px;
-    font-weight:500;
-    color:rgba(237,239,242,0.6);
-    margin-left:2px;
-  }
-  .phone-mock__stat-label{
-    margin-top:6px;
-    font-size:9.5px;
-    text-align:center;
-    line-height:1.4;
-    color:rgba(237,239,242,0.55);
-    padding:0 2px;
+    height:100%;
+    object-fit:cover;
+    object-position:top center;
+    display:block;
   }
   .phone-mock__caption{
     font-size:10px;
@@ -764,19 +720,12 @@
       <div class="case-grid">
         <article class="case-card">
           <div class="case-card__top">
-            <div class="phone-mock" aria-hidden="true">
+            <div class="phone-mock">
               <div class="phone-mock__frame">
                 <div class="phone-mock__notch"></div>
-                <div class="phone-mock__topbar">
-                  <span class="phone-mock__back">&#8249;</span>
-                  <span class="phone-mock__handle">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                  <span class="phone-mock__menu">&#8943;</span>
-                </div>
-                <div class="phone-mock__avatar">&#127981;</div>
-                <div class="phone-mock__stat-num">6<span class="phone-mock__unit">人</span></div>
-                <div class="phone-mock__stat-label">採用に貢献（8ヶ月）</div>
+                <img class="phone-mock__shot" src="assets/cases/case-manufacturing.jpg" alt="製造業クライアントのSNSアカウント画面" loading="lazy" />
               </div>
-              <span class="phone-mock__caption">※運用画面のイメージ図・アカウント名は伏せています</span>
+              <span class="phone-mock__caption">※実際の運用アカウントの画面</span>
             </div>
             <div class="case-card__content">
               <div class="case-card__industry">製造業（板金加工）</div>
@@ -798,19 +747,12 @@
 
         <article class="case-card">
           <div class="case-card__top">
-            <div class="phone-mock" aria-hidden="true">
+            <div class="phone-mock">
               <div class="phone-mock__frame">
                 <div class="phone-mock__notch"></div>
-                <div class="phone-mock__topbar">
-                  <span class="phone-mock__back">&#8249;</span>
-                  <span class="phone-mock__handle">&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;</span>
-                  <span class="phone-mock__menu">&#8943;</span>
-                </div>
-                <div class="phone-mock__avatar">&#129309;</div>
-                <div class="phone-mock__stat-num">5,000<span class="phone-mock__unit">人+</span></div>
-                <div class="phone-mock__stat-label">フォロワー（月間最高300万再生）</div>
+                <img class="phone-mock__shot" src="assets/cases/case-care.jpg" alt="介護事業所クライアントのSNSアカウント画面" loading="lazy" />
               </div>
-              <span class="phone-mock__caption">※運用画面のイメージ図・アカウント名は伏せています</span>
+              <span class="phone-mock__caption">※実際の運用アカウントの画面</span>
             </div>
             <div class="case-card__content">
               <div class="case-card__industry">介護事業所</div>
