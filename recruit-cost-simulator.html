@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>採用コスト診断書</title>
+<meta name="description" content="今の採用スタイルを続けた場合の採用コストを可視化し、SNSプロデュース＆運用代行(月額22万円)と比較するシミュレーター。" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;600;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#EAF0E4;
+    --surface:#F5F8F1;
+    --surface-raised:#FFFFFF;
+    --ink:#1F2A22;
+    --ink-muted:#5B6A5F;
+    --ink-faint:#8A9788;
+    --border:#C9D6C2;
+    --border-strong:#A9BBA1;
+    --accent-alert:#B5432F;
+    --accent-alert-soft:rgba(181,67,47,0.12);
+    --accent-value:#0B7A9E;
+    --accent-value-soft:rgba(11,122,158,0.12);
+    --grid-line:rgba(31,42,34,0.12);
+    --shadow:rgba(31,42,34,0.16);
+    --font-display:'Zen Old Mincho', 'Hiragino Mincho ProN', serif;
+    --font-body:'Zen Kaku Gothic New', 'Hiragino Sans', sans-serif;
+    --font-mono:'JetBrains Mono', 'SF Mono', monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#121A15;
+      --surface:#182119;
+      --surface-raised:#1D2A20;
+      --ink:#E7EFE2;
+      --ink-muted:#9FB09A;
+      --ink-faint:#6D7D6A;
+      --border:#2A362A;
+      --border-strong:#3B4A38;
+      --accent-alert:#E2604A;
+      --accent-alert-soft:rgba(226,96,74,0.18);
+      --accent-value:#2FA0C4;
+      --accent-value-soft:rgba(47,160,196,0.18);
+      --grid-line:rgba(231,239,226,0.12);
+      --shadow:rgba(0,0,0,0.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121A15;
+    --surface:#182119;
+    --surface-raised:#1D2A20;
+    --ink:#E7EFE2;
+    --ink-muted:#9FB09A;
+    --ink-faint:#6D7D6A;
+    --border:#2A362A;
+    --border-strong:#3B4A38;
+    --accent-alert:#E2604A;
+    --accent-alert-soft:rgba(226,96,74,0.18);
+    --accent-value:#2FA0C4;
+    --accent-value-soft:rgba(47,160,196,0.18);
+    --grid-line:rgba(231,239,226,0.12);
+    --shadow:rgba(0,0,0,0.5);
+  }
+
+  *{box-sizing:border-box;}
+  html{background:var(--paper);}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.001ms !important; transition-duration:0.001ms !important;}
+  }
+
+  .sheet{
+    max-width:920px;
+    margin:0 auto;
+    padding:28px 20px 80px;
+  }
+  .doc{
+    border:1px solid var(--border-strong);
+    background:var(--surface);
+    box-shadow:0 24px 60px -32px var(--shadow);
+    position:relative;
+  }
+
+  /* ---------- masthead ---------- */
+  .masthead{
+    position:relative;
+    padding:44px 40px 30px;
+    border-bottom:1px solid var(--border);
+    background:
+      repeating-linear-gradient(var(--grid-line) 0 1px, transparent 1px 33px);
+  }
+  .masthead__kicker{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.16em;
+    color:var(--ink-muted);
+    text-transform:uppercase;
+  }
+  .masthead__title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:clamp(30px, 5vw, 46px);
+    margin:10px 0 14px;
+    text-wrap:balance;
+    letter-spacing:0.02em;
+  }
+  .masthead__lead{
+    max-width:56ch;
+    color:var(--ink-muted);
+    font-size:16px;
+  }
+  .stamp{
+    position:absolute;
+    top:34px;
+    right:36px;
+    width:84px;
+    height:84px;
+    border:3px solid var(--accent-alert);
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transform:rotate(-9deg);
+    opacity:0.9;
+  }
+  .stamp::before{
+    content:"";
+    position:absolute;
+    inset:6px;
+    border:1px solid var(--accent-alert);
+    border-radius:50%;
+  }
+  .stamp span{
+    writing-mode:vertical-rl;
+    font-family:var(--font-display);
+    font-weight:900;
+    font-size:19px;
+    color:var(--accent-alert);
+    letter-spacing:0.1em;
+  }
+  @media (max-width:560px){
+    .stamp{width:64px;height:64px;top:20px;right:20px;}
+    .stamp span{font-size:14px;}
+    .masthead{padding:36px 22px 24px;}
+  }
+
+  /* ---------- sections ---------- */
+  .section{
+    padding:36px 40px;
+    border-bottom:1px solid var(--border);
+  }
+  .section:last-of-type{border-bottom:none;}
+  @media (max-width:560px){ .section{padding:28px 22px;} }
+
+  .eyebrow{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:0.14em;
+    color:var(--ink-faint);
+    text-transform:uppercase;
+    margin-bottom:8px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:18px;
+    height:1px;
+    background:var(--border-strong);
+    display:inline-block;
+  }
+  .section h2{
+    font-family:var(--font-display);
+    font-size:24px;
+    font-weight:700;
+    margin:0 0 6px;
+    letter-spacing:0.01em;
+  }
+  .section__note{
+    color:var(--ink-muted);
+    font-size:14.5px;
+    max-width:62ch;
+    margin:0 0 26px;
+  }
+
+  /* ---------- form fields ---------- */
+  .fields{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:26px 32px;
+  }
+  @media (max-width:640px){ .fields{grid-template-columns:1fr;} }
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .field__label{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    font-size:14px;
+    font-weight:700;
+  }
+  .field__label small{
+    display:block;
+    font-weight:500;
+    color:var(--ink-faint);
+    font-size:12px;
+    margin-top:2px;
+  }
+  .field__value{
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+    font-size:17px;
+    font-weight:700;
+    color:var(--accent-value);
+    white-space:nowrap;
+  }
+  input[type="range"]{
+    -webkit-appearance:none;
+    appearance:none;
+    width:100%;
+    height:4px;
+    border-radius:2px;
+    background:linear-gradient(var(--border-strong), var(--border-strong)) no-repeat;
+    background-size:100% 100%;
+    cursor:pointer;
+  }
+  input[type="range"]::-webkit-slider-runnable-track{
+    height:4px;
+    border-radius:2px;
+    background:var(--border);
+  }
+  input[type="range"]::-moz-range-track{
+    height:4px;
+    border-radius:2px;
+    background:var(--border);
+  }
+  input[type="range"]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:18px;height:18px;
+    border-radius:50%;
+    background:var(--surface-raised);
+    border:3px solid var(--accent-value);
+    margin-top:-7px;
+    cursor:pointer;
+  }
+  input[type="range"]::-moz-range-thumb{
+    width:12px;height:12px;
+    border-radius:50%;
+    background:var(--surface-raised);
+    border:3px solid var(--accent-value);
+    cursor:pointer;
+  }
+  input[type="range"]:focus-visible{outline:2px solid var(--accent-value); outline-offset:4px;}
+
+  /* ---------- hero numbers ---------- */
+  .hero-figure{
+    display:flex;
+    flex-wrap:wrap;
+    align-items:flex-end;
+    gap:12px 20px;
+    margin-bottom:22px;
+  }
+  .hero-figure__value{
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+    font-weight:700;
+    font-size:clamp(38px, 6vw, 58px);
+    color:var(--accent-alert);
+    line-height:1;
+  }
+  .hero-figure__unit{
+    font-size:16px;
+    color:var(--ink-muted);
+    padding-bottom:6px;
+  }
+  .hero-figure__sub{
+    width:100%;
+    font-size:14.5px;
+    color:var(--ink-muted);
+  }
+  .hero-figure__sub b{color:var(--ink); font-weight:700;}
+
+  .breakdown{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    border:1px solid var(--border);
+    background:var(--surface-raised);
+  }
+  .breakdown__row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:12px;
+    padding:12px 16px;
+    border-bottom:1px solid var(--border);
+    font-size:14.5px;
+  }
+  .breakdown__row:last-child{border-bottom:none; background:var(--accent-alert-soft);}
+  .breakdown__row span:first-child{color:var(--ink-muted);}
+  .breakdown__row span:last-child{
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+    font-weight:700;
+  }
+
+  .flag{
+    margin-top:20px;
+    display:flex;
+    gap:12px;
+    padding:14px 16px;
+    background:var(--accent-alert-soft);
+    border:1px solid var(--accent-alert);
+    font-size:14px;
+    color:var(--ink);
+  }
+  .flag__mark{
+    font-family:var(--font-display);
+    font-weight:900;
+    color:var(--accent-alert);
+    font-size:18px;
+    line-height:1;
+  }
+
+  /* ---------- bar chart ---------- */
+  .barchart{width:100%; margin-bottom:22px;}
+  .barchart .bar-label{font-family:var(--font-body); font-size:14px; font-weight:700; fill:var(--ink);}
+  .barchart .bar-value{font-family:var(--font-mono); font-size:15px; font-weight:700; font-variant-numeric:tabular-nums;}
+  .barchart .bar-track{fill:var(--border);}
+
+  .multiple-callout{
+    display:flex;
+    align-items:baseline;
+    gap:14px;
+    flex-wrap:wrap;
+    padding:20px 22px;
+    background:var(--surface-raised);
+    border:1px solid var(--border);
+  }
+  .multiple-callout__num{
+    font-family:var(--font-mono);
+    font-weight:700;
+    font-size:44px;
+    color:var(--accent-alert);
+    line-height:1;
+  }
+  .multiple-callout__text{font-size:15px; color:var(--ink-muted); max-width:44ch;}
+
+  .value-cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-top:20px;
+  }
+  @media (max-width:640px){ .value-cards{grid-template-columns:1fr;} }
+  .value-card{
+    padding:18px 20px;
+    border:1px solid var(--border);
+    background:var(--accent-value-soft);
+  }
+  .value-card__label{font-size:13px; color:var(--ink-muted); margin-bottom:8px;}
+  .value-card__num{
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+    font-weight:700;
+    font-size:26px;
+    color:var(--accent-value);
+  }
+
+  /* ---------- line chart ---------- */
+  .legend{
+    display:flex;
+    gap:22px;
+    flex-wrap:wrap;
+    margin-bottom:14px;
+    font-size:13.5px;
+    color:var(--ink-muted);
+  }
+  .legend__item{display:flex; align-items:center; gap:8px;}
+  .legend__swatch{width:12px; height:12px; border-radius:2px; flex:none;}
+
+  .chart2-wrap{position:relative; width:100%;}
+  .chart2-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+  .chart2 .grid-line{stroke:var(--grid-line); stroke-width:1;}
+  .chart2 .axis-label{font-family:var(--font-mono); font-size:11px; fill:var(--ink-faint);}
+  .chart2 .crosshair{stroke:var(--ink-faint); stroke-width:1; stroke-dasharray:3 3; opacity:0; pointer-events:none;}
+  .chart2 .hover-dot{opacity:0; pointer-events:none;}
+  .chart2 .hover-catch{fill:transparent; cursor:crosshair;}
+
+  .tooltip{
+    position:absolute;
+    pointer-events:none;
+    background:var(--surface-raised);
+    border:1px solid var(--border-strong);
+    box-shadow:0 8px 22px -10px var(--shadow);
+    padding:9px 12px;
+    font-size:12.5px;
+    line-height:1.6;
+    white-space:nowrap;
+    opacity:0;
+    transform:translate(-50%,-100%);
+    transition:opacity .1s ease;
+    z-index:5;
+  }
+  .tooltip.is-visible{opacity:1;}
+  .tooltip .t-month{font-family:var(--font-mono); color:var(--ink-faint); font-size:11px; margin-bottom:3px;}
+  .tooltip .t-row{display:flex; align-items:center; gap:6px;}
+  .tooltip .t-dot{width:8px;height:8px;border-radius:50%;flex:none;}
+  .tooltip .t-val{font-family:var(--font-mono); font-weight:700; font-variant-numeric:tabular-nums; margin-left:auto; padding-left:10px;}
+
+  details.table-toggle{margin-top:16px; font-size:13.5px;}
+  details.table-toggle summary{cursor:pointer; color:var(--accent-value); font-weight:700;}
+  .data-table-wrap{overflow-x:auto; margin-top:12px;}
+  table.data-table{border-collapse:collapse; width:100%; min-width:480px; font-size:13px;}
+  table.data-table th, table.data-table td{
+    border:1px solid var(--border);
+    padding:7px 10px;
+    text-align:right;
+    font-family:var(--font-mono);
+    font-variant-numeric:tabular-nums;
+  }
+  table.data-table th:first-child, table.data-table td:first-child{text-align:left; font-family:var(--font-body);}
+  table.data-table thead th{background:var(--surface); font-family:var(--font-body); font-weight:700;}
+
+  .summary3y{
+    display:grid;
+    grid-template-columns:1fr 1fr 1fr;
+    gap:16px;
+    margin-top:22px;
+  }
+  @media (max-width:680px){ .summary3y{grid-template-columns:1fr;} }
+  .summary3y .value-card__num{font-size:22px;}
+
+  /* ---------- closing ---------- */
+  .closing{
+    padding:44px 40px 40px;
+    background:var(--surface-raised);
+  }
+  .closing h2{
+    font-family:var(--font-display);
+    font-size:clamp(22px, 3.4vw, 30px);
+    margin:0 0 16px;
+    text-wrap:balance;
+  }
+  .closing p{max-width:60ch; color:var(--ink-muted); font-size:15px;}
+  .closing .price-badge{
+    display:inline-flex;
+    align-items:baseline;
+    gap:8px;
+    margin-top:18px;
+    padding:12px 18px;
+    border:1px solid var(--accent-value);
+    background:var(--accent-value-soft);
+    font-size:14px;
+  }
+  .closing .price-badge b{
+    font-family:var(--font-mono);
+    font-size:20px;
+    color:var(--accent-value);
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+
+  .footnote{
+    padding:22px 40px 34px;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    max-width:76ch;
+  }
+  @media (max-width:560px){ .closing, .footnote{padding-left:22px; padding-right:22px;} }
+</style>
+</head>
+<body>
+
+<div class="sheet">
+  <div class="doc">
+
+    <header class="masthead">
+      <div class="masthead__kicker">Recruitment Cost Statement</div>
+      <h1 class="masthead__title">採用コスト診断書</h1>
+      <p class="masthead__lead">
+        今の採用スタイルを続けたとき、実際にいくら消えているのか。数字を入れて、可視化してください。
+      </p>
+      <div class="stamp" aria-hidden="true"><span>要注意</span></div>
+    </header>
+
+    <!-- STEP 1 : inputs -->
+    <section class="section">
+      <div class="eyebrow">Step 1 — 現状を入力</div>
+      <h2>貴社の採用条件</h2>
+      <p class="section__note">まずは目安の数値が入っています。実際の条件に近づけて調整してください。</p>
+
+      <div class="fields">
+        <div class="field">
+          <div class="field__label">
+            <span>採用ポジションの想定年収</span>
+            <span class="field__value" id="salaryOut">400万円</span>
+          </div>
+          <input type="range" id="salaryRange" min="2000000" max="10000000" step="100000" value="4000000" aria-label="想定年収" />
+        </div>
+
+        <div class="field">
+          <div class="field__label">
+            <span>年間の採用予定人数</span>
+            <span class="field__value" id="hiresOut">3人</span>
+          </div>
+          <input type="range" id="hiresRange" min="1" max="20" step="1" value="3" aria-label="年間の採用予定人数" />
+        </div>
+
+        <div class="field">
+          <div class="field__label">
+            <span>人材紹介の手数料率
+              <small>相場は想定年収の30〜35%程度</small>
+            </span>
+            <span class="field__value" id="agencyOut">33%</span>
+          </div>
+          <input type="range" id="agencyRange" min="20" max="40" step="1" value="33" aria-label="人材紹介の手数料率" />
+        </div>
+
+        <div class="field">
+          <div class="field__label">
+            <span>その他の採用コスト（1人あたり）
+              <small>求人広告費・社内工数（面接/選考）の合計目安</small>
+            </span>
+            <span class="field__value" id="otherOut">38万円</span>
+          </div>
+          <input type="range" id="otherRange" min="0" max="1000000" step="10000" value="380000" aria-label="その他の採用コスト" />
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 2 : current cost -->
+    <section class="section">
+      <div class="eyebrow">Step 2 — 見えてきた採用コスト</div>
+      <h2>月換算の採用コスト</h2>
+
+      <div class="hero-figure">
+        <span class="hero-figure__value" id="monthlyOut">¥0</span>
+        <span class="hero-figure__unit">/ 月</span>
+        <p class="hero-figure__sub">年間では <b id="annualOut">¥0</b>。採用1人あたり <b id="perHireOut">¥0</b> が「内定」の瞬間に確定します。</p>
+      </div>
+
+      <div class="breakdown">
+        <div class="breakdown__row"><span>人材紹介手数料（1人あたり）</span><span id="agencyPartOut">¥0</span></div>
+        <div class="breakdown__row"><span>その他コスト（1人あたり）</span><span id="otherPartOut">¥0</span></div>
+        <div class="breakdown__row"><span>採用コスト合計（年間 ×人数）</span><span id="totalPartOut">¥0</span></div>
+      </div>
+
+      <div class="flag">
+        <span class="flag__mark">!</span>
+        <span>人材紹介の成功報酬は、入社後すぐに離職しても基本的に返金されません。活躍を保証しない「先払いの費用」です。</span>
+      </div>
+    </section>
+
+    <!-- STEP 3 : comparison -->
+    <section class="section">
+      <div class="eyebrow">Step 3 — SNS運用代行と比べると</div>
+      <h2>同じ「月額」で、これだけ違う</h2>
+      <p class="section__note">弊社の通常プラン（SNSプロデュース＆運用代行）は月額22万円の定額です。</p>
+
+      <svg class="barchart" id="barChart" viewBox="0 0 640 150" role="img" aria-label="月換算の採用コストとSNS運用代行の比較">
+        <rect class="bar-track" x="0" y="14" width="640" height="40" />
+        <path id="barRecruit" fill="var(--accent-alert)" />
+        <text class="bar-label" x="10" y="8" id="barRecruitLabel"></text>
+        <text class="bar-value" x="630" y="42" text-anchor="end" fill="var(--accent-alert)" id="barRecruitValue"></text>
+
+        <rect class="bar-track" x="0" y="96" width="640" height="40" />
+        <path id="barService" fill="var(--accent-value)" />
+        <text class="bar-label" x="10" y="90" id="barServiceLabel">SNS運用代行（通常プラン・月額）</text>
+        <text class="bar-value" x="630" y="124" text-anchor="end" fill="var(--accent-value)" id="barServiceValue">¥220,000</text>
+      </svg>
+
+      <div class="multiple-callout">
+        <span class="multiple-callout__num" id="multipleOut">0.0倍</span>
+        <span class="multiple-callout__text">同じ1ヶ月で、SNS運用代行の<b id="multipleOut2">0.0</b>倍の予算が採用に消えている計算です。</span>
+      </div>
+
+      <div class="value-cards">
+        <div class="value-card">
+          <div class="value-card__label">年間の採用予算は、SNS運用代行に換算すると</div>
+          <div class="value-card__num" id="monthsEquivalentOut">0ヶ月分</div>
+        </div>
+        <div class="value-card">
+          <div class="value-card__label">月あたりの差額（浮く可能性のある予算）</div>
+          <div class="value-card__num" id="diffMonthlyOut">¥0</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- STEP 4 : 3yr simulation -->
+    <section class="section">
+      <div class="eyebrow">Step 4 — 3年後、その費用はどうなる？</div>
+      <h2>採用費は「消える」。運用費は「積み上がる」。</h2>
+      <p class="section__note">早期離職が起きれば、同じ採用費がもう一度発生します。3年間の累計で比べてみます。</p>
+
+      <div class="fields" style="margin-bottom:24px;">
+        <div class="field">
+          <div class="field__label">
+            <span>早期離職率
+              <small>採用した人のうち、数年以内に離職して再採用が必要になる割合の目安</small>
+            </span>
+            <span class="field__value" id="turnoverOut">15%</span>
+          </div>
+          <input type="range" id="turnoverRange" min="0" max="40" step="1" value="15" aria-label="早期離職率" />
+        </div>
+      </div>
+
+      <div class="legend">
+        <span class="legend__item"><span class="legend__swatch" style="background:var(--accent-alert)"></span>採用コスト（累計）</span>
+        <span class="legend__item"><span class="legend__swatch" style="background:var(--accent-value)"></span>SNS運用代行（累計）</span>
+      </div>
+
+      <div class="chart2-wrap">
+        <svg class="chart2" id="chart2" viewBox="0 0 720 320" role="img" aria-label="36ヶ月間の累計コスト推移">
+          <g id="gridLines"></g>
+          <g id="axisLabels"></g>
+          <path id="areaRecruit" fill="var(--accent-alert)" opacity="0.10" stroke="none" />
+          <path id="areaService" fill="var(--accent-value)" opacity="0.10" stroke="none" />
+          <path id="lineRecruit" fill="none" stroke="var(--accent-alert)" stroke-width="2" stroke-linejoin="round" />
+          <path id="lineService" fill="none" stroke="var(--accent-value)" stroke-width="2" stroke-linejoin="round" />
+          <circle id="endDotRecruit" r="4.5" fill="var(--accent-alert)" />
+          <circle id="endDotService" r="4.5" fill="var(--accent-value)" />
+          <text id="endLabelRecruit" class="axis-label" font-weight="700" fill="var(--accent-alert)"></text>
+          <text id="endLabelService" class="axis-label" font-weight="700" fill="var(--accent-value)"></text>
+          <line id="crosshair" class="crosshair" y1="10" y2="270" />
+          <circle id="hoverDotRecruit" class="hover-dot" r="4" fill="var(--accent-alert)" />
+          <circle id="hoverDotService" class="hover-dot" r="4" fill="var(--accent-value)" />
+          <rect id="hoverCatch" class="hover-catch" x="0" y="0" width="720" height="290" />
+        </svg>
+        <div class="tooltip" id="tooltip">
+          <div class="t-month" id="tt-month"></div>
+          <div class="t-row"><span class="t-dot" style="background:var(--accent-alert)"></span>採用コスト<span class="t-val" id="tt-recruit"></span></div>
+          <div class="t-row"><span class="t-dot" style="background:var(--accent-value)"></span>SNS運用代行<span class="t-val" id="tt-service"></span></div>
+        </div>
+      </div>
+
+      <details class="table-toggle">
+        <summary>表で見る</summary>
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead><tr><th>経過月</th><th>採用コスト（累計）</th><th>SNS運用代行（累計）</th></tr></thead>
+            <tbody id="timelineTableBody"></tbody>
+          </table>
+        </div>
+      </details>
+
+      <div class="summary3y">
+        <div class="value-card">
+          <div class="value-card__label">3年間の累計採用コスト</div>
+          <div class="value-card__num" id="recruit3yOut">¥0</div>
+        </div>
+        <div class="value-card">
+          <div class="value-card__label">3年間のSNS運用代行費用</div>
+          <div class="value-card__num" id="service3yOut">¥0</div>
+        </div>
+        <div class="value-card">
+          <div class="value-card__label">3年間の差額</div>
+          <div class="value-card__num" id="diff3yOut">¥0</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="closing">
+      <h2>消えていく採用費を、育つ資産に。</h2>
+      <p>
+        人材紹介の手数料は、1人採用するたびに支払って終わる「フロー」の支出です。SNSプロデュース＆運用代行は、
+        投稿・フォロワー・認知という「ストック」を積み上げながら、採用にも営業にも効いてくる土台をつくります。
+        同じ予算をどちらに置くかは、検討する価値があるはずです。
+      </p>
+      <div class="price-badge">SNSプロデュース＆運用代行（通常プラン）&nbsp;<b>月額22万円</b></div>
+    </div>
+
+    <p class="footnote">
+      ※本シミュレーターの数値はすべて目安です。人材紹介手数料の相場は一般的に想定年収の30〜35%程度とされていますが、実際の採用コストは業界・職種・地域・紹介会社によって異なります。3年間シミュレーションは、入力された人数を毎年採用し続け、さらに早期離職率に応じた人数を追加で再採用すると仮定した簡易モデルです。投資判断の参考情報としてご利用ください。
+    </p>
+  </div>
+</div>
+
+<script>
+(function(){
+  const SERVICE_MONTHLY = 220000;
+
+  const el = (id) => document.getElementById(id);
+  const salaryRange = el('salaryRange');
+  const hiresRange = el('hiresRange');
+  const agencyRange = el('agencyRange');
+  const otherRange = el('otherRange');
+  const turnoverRange = el('turnoverRange');
+
+  function yen(n){
+    return '¥' + Math.round(n).toLocaleString('ja-JP');
+  }
+  function man(n){
+    return Math.round(n/10000).toLocaleString('ja-JP') + '万円';
+  }
+
+  function roundedBarPath(x0, y, width, h, r){
+    width = Math.max(width, 0);
+    if(width < r*2){
+      // too small for rounded corner, draw plain rect
+      return `M ${x0} ${y} H ${x0+width} V ${y+h} H ${x0} Z`;
+    }
+    return `M ${x0} ${y} H ${x0+width-r} Q ${x0+width} ${y} ${x0+width} ${y+r} V ${y+h-r} Q ${x0+width} ${y+h} ${x0+width-r} ${y+h} H ${x0} Z`;
+  }
+
+  function buildTimeline(perHire, hires, turnoverRate){
+    const months = 36;
+    const events = [];
+    const n1 = Math.max(1, Math.round(hires));
+    // 年間の採用予定人数は毎年繰り返し発生する（成長を続ける限り採用活動も続くため）
+    for(let year=0; year<3; year++){
+      for(let i=0;i<n1;i++){
+        const m = year*12 + Math.round(((i+1)/(n1+1)) * 12);
+        events.push({ month: Math.max(1, Math.min(months, m)), cost: perHire });
+      }
+    }
+    // 早期離職による追加の再採用コスト（1年目・2年目に採用した人が離職した場合の補充）
+    const repeatCost = perHire * hires * (turnoverRate/100);
+    if(repeatCost > 0){
+      events.push({ month: 18, cost: repeatCost });
+      events.push({ month: 30, cost: repeatCost });
+    }
+    const recruitCum = new Array(months+1).fill(0);
+    const serviceCum = new Array(months+1).fill(0);
+    let running = 0;
+    for(let m=1;m<=months;m++){
+      events.filter(e => e.month === m).forEach(e => running += e.cost);
+      recruitCum[m] = running;
+      serviceCum[m] = SERVICE_MONTHLY * m;
+    }
+    return { recruitCum, serviceCum };
+  }
+
+  function render(){
+    const salary = Number(salaryRange.value);
+    const hires = Number(hiresRange.value);
+    const agencyRate = Number(agencyRange.value);
+    const otherCost = Number(otherRange.value);
+    const turnoverRate = Number(turnoverRange.value);
+
+    el('salaryOut').textContent = man(salary);
+    el('hiresOut').textContent = hires + '人';
+    el('agencyOut').textContent = agencyRate + '%';
+    el('otherOut').textContent = man(otherCost);
+    el('turnoverOut').textContent = turnoverRate + '%';
+
+    const agencyFee = salary * (agencyRate/100);
+    const perHire = agencyFee + otherCost;
+    const annualCost = perHire * hires;
+    const monthlyCost = annualCost / 12;
+
+    el('monthlyOut').textContent = yen(monthlyCost);
+    el('annualOut').textContent = yen(annualCost);
+    el('perHireOut').textContent = yen(perHire);
+    el('agencyPartOut').textContent = yen(agencyFee);
+    el('otherPartOut').textContent = yen(otherCost);
+    el('totalPartOut').textContent = yen(annualCost);
+
+    // --- bar chart ---
+    const maxBar = Math.max(monthlyCost, SERVICE_MONTHLY) * 1.08;
+    const w1 = (monthlyCost / maxBar) * 640;
+    const w2 = (SERVICE_MONTHLY / maxBar) * 640;
+    el('barRecruit').setAttribute('d', roundedBarPath(0, 14, w1, 40, 4));
+    el('barService').setAttribute('d', roundedBarPath(0, 96, w2, 40, 4));
+    el('barRecruitLabel').textContent = '現在の採用コスト（月換算）';
+    el('barRecruitValue').textContent = yen(monthlyCost);
+    el('barRecruitValue').setAttribute('x', Math.max(w1 - 10, 90));
+    el('barRecruitValue').setAttribute('y', 42);
+    el('barRecruitValue').setAttribute('text-anchor', w1 > 140 ? 'end' : 'start');
+    if(w1 <= 140){ el('barRecruitValue').setAttribute('x', w1 + 10); }
+
+    el('barServiceValue').setAttribute('x', Math.max(w2 - 10, 90));
+    el('barServiceValue').setAttribute('text-anchor', w2 > 140 ? 'end' : 'start');
+    if(w2 <= 140){ el('barServiceValue').setAttribute('x', w2 + 10); }
+
+    const multiple = monthlyCost / SERVICE_MONTHLY;
+    el('multipleOut').textContent = multiple.toFixed(1) + '倍';
+    el('multipleOut2').textContent = multiple.toFixed(1);
+
+    const monthsEquivalent = annualCost / SERVICE_MONTHLY;
+    el('monthsEquivalentOut').textContent = monthsEquivalent.toFixed(1) + 'ヶ月分';
+    el('diffMonthlyOut').textContent = yen(Math.abs(monthlyCost - SERVICE_MONTHLY));
+
+    // --- 36 month timeline ---
+    const { recruitCum, serviceCum } = buildTimeline(perHire, hires, turnoverRate);
+    const months = 36;
+    const maxVal = Math.max(recruitCum[months], serviceCum[months]) * 1.12 || 1;
+
+    const padL = 12, padR = 90, padT = 14, padB = 30;
+    const plotW = 720 - padL - padR;
+    const plotH = 320 - padT - padB;
+    const x = (m) => padL + (m/months) * plotW;
+    const y = (v) => padT + plotH - (v/maxVal) * plotH;
+
+    // grid + axis labels
+    const gridG = el('gridLines');
+    const axisG = el('axisLabels');
+    gridG.innerHTML = '';
+    axisG.innerHTML = '';
+    const ticks = 4;
+    for(let i=0;i<=ticks;i++){
+      const v = (maxVal/ticks)*i;
+      const gy = y(v);
+      const line = document.createElementNS('http://www.w3.org/2000/svg','line');
+      line.setAttribute('class','grid-line');
+      line.setAttribute('x1', padL); line.setAttribute('x2', padL+plotW);
+      line.setAttribute('y1', gy); line.setAttribute('y2', gy);
+      gridG.appendChild(line);
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('class','axis-label');
+      t.setAttribute('x', 2); t.setAttribute('y', gy - 3);
+      t.textContent = man(v);
+      axisG.appendChild(t);
+    }
+    [0,12,24,36].forEach(m => {
+      const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+      t.setAttribute('class','axis-label');
+      t.setAttribute('x', x(m));
+      t.setAttribute('y', padT+plotH+18);
+      t.setAttribute('text-anchor', m===0 ? 'start' : (m===36 ? 'end' : 'middle'));
+      t.textContent = m + 'ヶ月';
+      axisG.appendChild(t);
+    });
+
+    function stepPath(arr){
+      let d = `M ${x(0)} ${y(arr[0])}`;
+      for(let m=1;m<=months;m++){
+        d += ` L ${x(m)} ${y(arr[m-1])} L ${x(m)} ${y(arr[m])}`;
+      }
+      return d;
+    }
+    function linearPath(arr){
+      let d = `M ${x(0)} ${y(arr[0])}`;
+      for(let m=1;m<=months;m++){
+        d += ` L ${x(m)} ${y(arr[m])}`;
+      }
+      return d;
+    }
+    function areaPath(linePathD, arr){
+      return `${linePathD} L ${x(months)} ${padT+plotH} L ${x(0)} ${padT+plotH} Z`;
+    }
+
+    const recruitLineD = stepPath(recruitCum);
+    const serviceLineD = linearPath(serviceCum);
+    el('lineRecruit').setAttribute('d', recruitLineD);
+    el('lineService').setAttribute('d', serviceLineD);
+    el('areaRecruit').setAttribute('d', areaPath(recruitLineD, recruitCum));
+    el('areaService').setAttribute('d', areaPath(serviceLineD, serviceCum));
+
+    el('endDotRecruit').setAttribute('cx', x(months));
+    el('endDotRecruit').setAttribute('cy', y(recruitCum[months]));
+    el('endDotService').setAttribute('cx', x(months));
+    el('endDotService').setAttribute('cy', y(serviceCum[months]));
+
+    const elr = el('endLabelRecruit');
+    elr.setAttribute('x', x(months)+8);
+    elr.setAttribute('y', y(recruitCum[months])+4);
+    elr.textContent = man(recruitCum[months]);
+    const els = el('endLabelService');
+    els.setAttribute('x', x(months)+8);
+    els.setAttribute('y', y(serviceCum[months])+4);
+    els.textContent = man(serviceCum[months]);
+
+    el('recruit3yOut').textContent = yen(recruitCum[months]);
+    el('service3yOut').textContent = yen(serviceCum[months]);
+    el('diff3yOut').textContent = yen(Math.abs(recruitCum[months]-serviceCum[months]));
+
+    // table
+    const tbody = el('timelineTableBody');
+    tbody.innerHTML = '';
+    for(let m=0;m<=months;m+=3){
+      const tr = document.createElement('tr');
+      tr.innerHTML = `<td>${m}ヶ月目</td><td>${yen(recruitCum[m])}</td><td>${yen(serviceCum[m])}</td>`;
+      tbody.appendChild(tr);
+    }
+
+    // store for hover
+    render._recruitCum = recruitCum;
+    render._serviceCum = serviceCum;
+    render._x = x; render._y = y;
+  }
+
+  // hover interaction on chart2
+  const svg = el('chart2');
+  const catch_ = el('hoverCatch');
+  const tooltip = el('tooltip');
+  const wrap = document.querySelector('.chart2-wrap');
+  const crosshair = el('crosshair');
+  const hoverRecruit = el('hoverDotRecruit');
+  const hoverService = el('hoverDotService');
+
+  function pt(evt){
+    const rect = svg.getBoundingClientRect();
+    const vb = svg.viewBox.baseVal;
+    const clientX = (evt.touches ? evt.touches[0].clientX : evt.clientX);
+    const clientY = (evt.touches ? evt.touches[0].clientY : evt.clientY);
+    const sx = ((clientX - rect.left) / rect.width) * vb.width;
+    const sy = ((clientY - rect.top) / rect.height) * vb.height;
+    return { sx, sy, rect };
+  }
+
+  function onMove(evt){
+    if(!render._x) return;
+    const { sx, rect } = pt(evt);
+    const months = 36;
+    const padL = 12, padR = 90;
+    const plotW = 720 - padL - padR;
+    let m = Math.round(((sx - padL) / plotW) * months);
+    m = Math.max(0, Math.min(months, m));
+    const cx = render._x(m);
+    crosshair.setAttribute('x1', cx);
+    crosshair.setAttribute('x2', cx);
+    crosshair.style.opacity = 1;
+
+    const ry = render._y(render._recruitCum[m]);
+    const sy2 = render._y(render._serviceCum[m]);
+    hoverRecruit.setAttribute('cx', cx); hoverRecruit.setAttribute('cy', ry); hoverRecruit.style.opacity = 1;
+    hoverService.setAttribute('cx', cx); hoverService.setAttribute('cy', sy2); hoverService.style.opacity = 1;
+
+    el('tt-month').textContent = m + 'ヶ月目';
+    el('tt-recruit').textContent = yen(render._recruitCum[m]);
+    el('tt-service').textContent = yen(render._serviceCum[m]);
+
+    const px = (cx / 720) * rect.width;
+    const py = (Math.min(ry, sy2) / 320) * rect.height;
+    tooltip.style.left = px + 'px';
+    tooltip.style.top = Math.max(py - 12, 40) + 'px';
+    tooltip.classList.add('is-visible');
+  }
+  function onLeave(){
+    crosshair.style.opacity = 0;
+    hoverRecruit.style.opacity = 0;
+    hoverService.style.opacity = 0;
+    tooltip.classList.remove('is-visible');
+  }
+  catch_.addEventListener('mousemove', onMove);
+  catch_.addEventListener('mouseleave', onLeave);
+  catch_.addEventListener('touchmove', (e)=>{ onMove(e); }, {passive:true});
+  catch_.addEventListener('touchend', onLeave);
+
+  [salaryRange, hiresRange, agencyRange, otherRange, turnoverRange].forEach(input => {
+    input.addEventListener('input', render);
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
