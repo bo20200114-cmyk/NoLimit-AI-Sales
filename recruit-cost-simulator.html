@@ -161,6 +161,20 @@
     .stamp span{font-size:14px;}
     .masthead{padding:36px 22px 24px;}
   }
+  @media (min-width:901px){
+    .stamp{
+      width:140px;
+      height:140px;
+      top:30px;
+      right:40px;
+      border-width:5px;
+      opacity:1;
+      transform:rotate(-11deg);
+      box-shadow:0 10px 26px -10px var(--accent-alert), 0 0 0 1px var(--accent-alert-soft);
+    }
+    .stamp::before{ inset:10px; border-width:2px; }
+    .stamp span{ font-size:32px; }
+  }
 
   /* ---------- sections ---------- */
   .section{
