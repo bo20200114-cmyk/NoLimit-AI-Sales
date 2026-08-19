@@ -622,6 +622,36 @@
     font-variant-numeric:tabular-nums;
     white-space:nowrap;
   }
+  .cta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
+    margin-top:26px;
+  }
+  .cta-btn{
+    flex:1 1 220px;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    padding:15px 24px;
+    font-size:15px;
+    font-weight:700;
+    text-align:center;
+    text-decoration:none;
+    border:1px solid transparent;
+    transition:opacity .15s ease;
+  }
+  .cta-btn:hover{ opacity:0.85; }
+  .cta-btn--primary{
+    background:var(--accent-value);
+    color:#fff;
+    border-color:var(--accent-value);
+  }
+  .cta-btn--secondary{
+    background:transparent;
+    color:var(--ink);
+    border-color:var(--border-strong);
+  }
   .closing .effect-note{
     max-width:60ch;
     margin:14px 0 0;
@@ -906,6 +936,11 @@
       <p>人材紹介の手数料は、1人採用するたびに支払って終わる「フロー」の支出です。SNSプロデュース＆運用代行は、投稿・フォロワー・認知・信頼という「ストック」を積み上げながら、採用にも営業にも効いてくる土台をつくります。同じ予算をどちらに置くかは、検討する価値があるはずです。</p>
       <div class="price-badge">SNSプロデュース＆運用代行（通常プラン）&nbsp;<b>月額22万円</b></div>
       <p class="effect-note">※SNS運用による採用・売上への効果を保証するものではありません。ただし、これまでの実績において成果が出なかった事例はありません。</p>
+
+      <div class="cta-row">
+        <a class="cta-btn cta-btn--primary" href="https://lin.ee/UN3A3cY" target="_blank" rel="noopener noreferrer">公式LINEで無料相談する</a>
+        <a class="cta-btn cta-btn--secondary" href="https://socialsupercharger.jp/" target="_blank" rel="noopener noreferrer">公式ホームページを見る</a>
+      </div>
     </div>
 
     <p class="footnote">
