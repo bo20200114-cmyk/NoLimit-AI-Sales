@@ -540,17 +540,9 @@
   .legend__item{display:flex; align-items:center; gap:8px;}
   .legend__swatch{width:12px; height:12px; border-radius:2px; flex:none;}
 
-  .chart2-wrap{position:relative; width:100%; overflow-x:auto; -webkit-overflow-scrolling:touch;}
-  .chart2-wrap svg{width:100%; min-width:720px; height:auto; display:block; overflow:visible;}
-  .chart2-hint{
-    display:none;
-    font-size:12px;
-    color:var(--ink-faint);
-    margin-bottom:8px;
-  }
-  @media (max-width:760px){
-    .chart2-hint{ display:block; }
-  }
+  .chart2-wrap{position:relative; width:100%;}
+  .chart2-wrap svg{width:100%; height:auto; display:block; overflow:visible;}
+  .chart2.is-compact .axis-label{ font-size:15px; }
   .chart2 .grid-line{stroke:var(--grid-line); stroke-width:1;}
   .chart2 .axis-label{font-family:var(--font-mono); font-size:11px; fill:var(--ink-faint);}
   .chart2 .crosshair{stroke:var(--ink-faint); stroke-width:1; stroke-dasharray:3 3; opacity:0; pointer-events:none;}
@@ -859,7 +851,6 @@
         <span class="legend__item"><span class="legend__swatch" style="background:var(--accent-value)"></span>SNS運用代行（累計）</span>
       </div>
 
-      <p class="chart2-hint">→ 横にスクロールできます</p>
       <div class="chart2-wrap">
         <svg class="chart2" id="chart2" viewBox="0 0 720 320" role="img" aria-label="36ヶ月間の累計コスト推移">
           <g id="gridLines"></g>
@@ -1033,11 +1024,25 @@
     const months = 36;
     const maxVal = Math.max(recruitCum[months], serviceCum[months]) * 1.12 || 1;
 
-    const padL = 12, padR = 90, padT = 14, padB = 30;
-    const plotW = 720 - padL - padR;
-    const plotH = 320 - padT - padB;
+    const compact = window.innerWidth < 640;
+    const vbW = compact ? 400 : 720;
+    const vbH = compact ? 300 : 320;
+    const padL = compact ? 8 : 12;
+    const padR = compact ? 8 : 90;
+    const padT = compact ? 18 : 14;
+    const padB = compact ? 46 : 30;
+    const plotW = vbW - padL - padR;
+    const plotH = vbH - padT - padB;
     const x = (m) => padL + (m/months) * plotW;
     const y = (v) => padT + plotH - (v/maxVal) * plotH;
+
+    const chart2El = el('chart2');
+    chart2El.setAttribute('viewBox', `0 0 ${vbW} ${vbH}`);
+    chart2El.classList.toggle('is-compact', compact);
+    el('hoverCatch').setAttribute('width', vbW);
+    el('hoverCatch').setAttribute('height', padT + plotH + padB);
+    el('crosshair').setAttribute('y1', padT - 4);
+    el('crosshair').setAttribute('y2', padT + plotH);
 
     // grid + axis labels
     const gridG = el('gridLines');
@@ -1100,12 +1105,23 @@
     el('endDotService').setAttribute('cy', y(serviceCum[months]));
 
     const elr = el('endLabelRecruit');
-    elr.setAttribute('x', x(months)+8);
-    elr.setAttribute('y', y(recruitCum[months])+4);
-    elr.textContent = man(recruitCum[months]);
     const els = el('endLabelService');
-    els.setAttribute('x', x(months)+8);
-    els.setAttribute('y', y(serviceCum[months])+4);
+    if(compact){
+      elr.setAttribute('x', x(months));
+      elr.setAttribute('y', y(recruitCum[months]) - 10);
+      elr.setAttribute('text-anchor', 'end');
+      els.setAttribute('x', x(months));
+      els.setAttribute('y', y(serviceCum[months]) + 18);
+      els.setAttribute('text-anchor', 'end');
+    } else {
+      elr.setAttribute('x', x(months)+8);
+      elr.setAttribute('y', y(recruitCum[months])+4);
+      elr.setAttribute('text-anchor', 'start');
+      els.setAttribute('x', x(months)+8);
+      els.setAttribute('y', y(serviceCum[months])+4);
+      els.setAttribute('text-anchor', 'start');
+    }
+    elr.textContent = man(recruitCum[months]);
     els.textContent = man(serviceCum[months]);
 
     el('recruit3yOut').textContent = yen(recruitCum[months]);
@@ -1125,6 +1141,7 @@
     render._recruitCum = recruitCum;
     render._serviceCum = serviceCum;
     render._x = x; render._y = y;
+    render._padL = padL; render._plotW = plotW; render._months = months;
   }
 
   // hover interaction on chart2
@@ -1149,9 +1166,9 @@
   function onMove(evt){
     if(!render._x) return;
     const { sx, rect } = pt(evt);
-    const months = 36;
-    const padL = 12, padR = 90;
-    const plotW = 720 - padL - padR;
+    const months = render._months;
+    const padL = render._padL;
+    const plotW = render._plotW;
     let m = Math.round(((sx - padL) / plotW) * months);
     m = Math.max(0, Math.min(months, m));
     const cx = render._x(m);
@@ -1168,8 +1185,9 @@
     el('tt-recruit').textContent = yen(render._recruitCum[m]);
     el('tt-service').textContent = yen(render._serviceCum[m]);
 
-    const px = (cx / 720) * rect.width;
-    const py = (Math.min(ry, sy2) / 320) * rect.height;
+    const vb = svg.viewBox.baseVal;
+    const px = (cx / vb.width) * rect.width;
+    const py = (Math.min(ry, sy2) / vb.height) * rect.height;
     tooltip.style.left = px + 'px';
     tooltip.style.top = Math.max(py - 12, 40) + 'px';
     tooltip.classList.add('is-visible');
@@ -1187,6 +1205,12 @@
 
   [salaryRange, hiresRange, agencyRange, otherRange, turnoverRange].forEach(input => {
     input.addEventListener('input', render);
+  });
+
+  let resizeTimer = null;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 150);
   });
 
   render();
